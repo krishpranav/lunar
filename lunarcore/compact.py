@@ -8,7 +8,7 @@ class Compatibility(object):
         self.patch = patch
 
         if Compatibility.version is not None:
-            raise Exception(f"Justpy compatibility has already been set to {major}.{minor}.{patch}")
+            raise Exception(f"lunar compatibility has already been set to {major}.{minor}.{patch}")
         Compatibility.version=self
         
     @classmethod

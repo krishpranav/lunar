@@ -1,14 +1,14 @@
 var signature_pads = {};
     Vue.component('signaturepad', {
         template:
-            `<canvas  v-bind:id="jp_props.id" :class="jp_props.classes"  :style="jp_props.style" :width="jp_props.width" height="jp_props.height"></canvas>`,
+            `<canvas  v-bind:id="ln_props.id" :class="ln_props.classes"  :style="ln_props.style" :width="ln_props.width" height="ln_props.height"></canvas>`,
         methods: {
             pad_change() {
-                var id = this.$props.jp_props.id.toString();
+                var id = this.$props.ln_props.id.toString();
                 var canvas = document.getElementById(id);
-                var signaturePad = new SignaturePad(canvas, this.$props.jp_props.options);
+                var signaturePad = new SignaturePad(canvas, this.$props.ln_props.options);
                 signature_pads[id] = signaturePad;
-                var events = this.$props.jp_props.events;
+                var events = this.$props.ln_props.events;
                 var props = this.$props;
 
                 function onEnd() {
@@ -17,10 +17,10 @@ var signature_pads = {};
                         var point_data = signaturePad.toData();
                         var e = {
                             'event_type': 'onEnd',
-                            'id': props.jp_props.id,
-                            'class_name': props.jp_props.class_name,
-                            'html_tag': props.jp_props.html_tag,
-                            'vue_type': props.jp_props.vue_type,
+                            'id': props.ln_props.id,
+                            'class_name': props.ln_props.class_name,
+                            'html_tag': props.ln_props.html_tag,
+                            'vue_type': props.ln_props.vue_type,
                             'page_id': page_id,
                             'websocket_id': websocket_id,
                             'data': data,
@@ -39,11 +39,11 @@ var signature_pads = {};
         },
         updated() {
 
-            if (this.$props.jp_props.clear) {
-                signature_pads[this.$props.jp_props.id.toString()].clear();
+            if (this.$props.ln_props.clear) {
+                signature_pads[this.$props.ln_props.id.toString()].clear();
             }
         },
         props: {
-            jp_props: Object
+            ln_props: Object
         }
     });

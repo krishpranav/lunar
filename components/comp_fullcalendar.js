@@ -1,7 +1,7 @@
 var full_calendars = {};
 Vue.component('fullcalendar', {
     template:
-        `<div  v-bind:id="jp_props.id" :class="jp_props.classes"  :style="jp_props.style" ></div>`,
+        `<div  v-bind:id="ln_props.id" :class="ln_props.classes"  :style="ln_props.style" ></div>`,
 
     methods: {
         get_all_events(calendar) {
@@ -22,20 +22,20 @@ Vue.component('fullcalendar', {
             return event_data;
         },
         calendar_change() {
-            var id = this.$props.jp_props.id.toString();
-            var events = this.$props.jp_props.events;
+            var id = this.$props.ln_props.id.toString();
+            var events = this.$props.ln_props.events;
             var props = this.$props;
             var calendarEl = document.getElementById(id);
-            var calendar = new FullCalendar.Calendar(calendarEl, this.$props.jp_props.options);
+            var calendar = new FullCalendar.Calendar(calendarEl, this.$props.ln_props.options);
             const parent_comp = this;
             if (events.includes('eventClick'))
                 calendar.on('eventClick', function (info) {
                     var e = {
                         'event_type': 'eventClick',
-                        'id': props.jp_props.id,
-                        'class_name': props.jp_props.class_name,
-                        'html_tag': props.jp_props.html_tag,
-                        'vue_type': props.jp_props.vue_type,
+                        'id': props.ln_props.id,
+                        'class_name': props.ln_props.class_name,
+                        'html_tag': props.ln_props.html_tag,
+                        'vue_type': props.ln_props.vue_type,
                         'page_id': page_id,
                         'websocket_id': websocket_id,
                         'event_data': parent_comp.create_object_from_event(info.event),
@@ -48,10 +48,10 @@ Vue.component('fullcalendar', {
                 calendar.on('eventDrop', function (info) {
                     var e = {
                         'event_type': 'eventDrop',
-                        'id': props.jp_props.id,
-                        'class_name': props.jp_props.class_name,
-                        'html_tag': props.jp_props.html_tag,
-                        'vue_type': props.jp_props.vue_type,
+                        'id': props.ln_props.id,
+                        'class_name': props.ln_props.class_name,
+                        'html_tag': props.ln_props.html_tag,
+                        'vue_type': props.ln_props.vue_type,
                         'page_id': page_id,
                         'websocket_id': websocket_id,
                         'event_data': parent_comp.create_object_from_event(info.event),
@@ -62,7 +62,7 @@ Vue.component('fullcalendar', {
                     send_to_server(e, 'event');
                 });
             full_calendars[id] = calendar;
-            comp_dict[this.$props.jp_props.id] = calendar;
+            comp_dict[this.$props.ln_props.id] = calendar;
 
             calendar.render();
         },
@@ -73,12 +73,12 @@ Vue.component('fullcalendar', {
         this.calendar_change();
     },
     updated() {
-        var calendar = comp_dict[this.$props.jp_props.id];
+        var calendar = comp_dict[this.$props.ln_props.id];
         calendar.destroy();
         this.calendar_change();
 
     },
     props: {
-        jp_props: Object
+        ln_props: Object
     }
 });
