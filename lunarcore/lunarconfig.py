@@ -1,0 +1,3 @@
+AGGRID=None
+QUASAR=None
+VERBOSE=None
